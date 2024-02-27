@@ -7,6 +7,8 @@ Each step of the project will be committed with a `feat:name` tag to clearly sep
 
 ## Features
 - [ ] Custom Routing 
+Ich habe composer initalisiert und den aoutloader auf das Hauptverzeichnes dieses Projektes in der ``cpmoser.json`` eingefügt dann habe ich mit composer update den autoloader verfügbar gemacht. 
+
 - [ ] Composer Integration
 - [ ] Views/Layouts
 - [ ] Models
