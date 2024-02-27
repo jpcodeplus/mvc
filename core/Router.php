@@ -13,14 +13,17 @@ namespace app\core; // Definiert den Namensraum
 class Router
 {
     public Request $request; // Request-Instanz für Zugriff auf Anfragedaten
+    public Response $response; // Request-Instanz für Zugriff auf Anfragedaten
     protected array $routes = []; // Speichert alle Routen
 
     /**
      * Konstruktor - Initialisiert den Router mit einer Request-Instanz
      */
-    public function __construct(Request $request)
+    public function __construct(Request $request, Response $response)
     {
+
         $this->request = $request;
+        $this->response = $response;
     }
 
     /**
@@ -46,7 +49,8 @@ class Router
         $callback = $this->routes[$method][$path] ?? false; // Sucht den Callback für die Route
 
         if (!$callback) {
-            exit('ROUTE NOT FOUND'); // Beendet das Script, wenn keine Route gefunden wurde
+            $this->response->getStatusCode(404);
+            return 'NOT FOUND';
         }
 
         if (is_string($callback)) {
