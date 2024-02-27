@@ -49,6 +49,15 @@ class Router
             exit('ROUTE NOT FOUND'); // Beendet das Script, wenn keine Route gefunden wurde
         }
 
-        echo call_user_func($callback); // Führt den Callback aus und gibt das Ergebnis aus
+        if (is_string($callback)) {
+            return $this->renderView($callback);
+        }
+
+        return call_user_func($callback); // Führt den Callback aus und gibt das Ergebnis aus
+    }
+
+    public function renderView($view)
+    {
+        include_once __DIR__ . "/../views/$view.php";
     }
 }

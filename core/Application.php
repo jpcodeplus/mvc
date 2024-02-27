@@ -28,6 +28,6 @@ class Application
      */
     public function run()
     {
-        $this->router->resolve(); // Löst die aktuelle Route/URL auf
+        echo $this->router->resolve(); // Löst die aktuelle Route/URL auf
     }
 }
