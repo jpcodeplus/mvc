@@ -8,10 +8,11 @@ namespace app\core; // Definiert den Namensraum
  * @package app\core
  */
 
-class Response
-{
-    public function getStatusCode(int $code)
-    {
-        http_response_code($code);
-    }
-}
+
+ class Response
+ {
+     public function setStatusCode(int $code)
+     {
+         http_response_code($code);
+     }
+ }
