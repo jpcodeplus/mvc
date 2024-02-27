@@ -11,14 +11,16 @@ namespace app\core; // Definiert den Namensraum
  */
 class Application
 {
+    public static string $ROOT_DIR;
     public Router $router; // Router-Instanz für URL-Routing
     public Request $request; // Request-Instanz für HTTP-Anfragen
 
     /**
      * Konstruktor - Initialisiert die Anwendung
      */
-    public function __construct()
+    public function __construct($rootPath)
     {
+        self::$ROOT_DIR = $rootPath;
         $this->request = new Request(); // Erstellt eine neue Request-Instanz
         $this->router = new Router($this->request); // Erstellt eine neue Router-Instanz mit der Request-Instanz
     }
