@@ -24,7 +24,7 @@ class Request
         $path = $_SERVER['REQUEST_URI'] ?? '/'; // Holt den aktuellen URI-Pfad oder setzt Standardpfad
         $position = strpos($path, '?'); // Sucht die Position des ersten Query-Parameters
 
-        if($position === false) return $path; // Gibt den ganzen Pfad zurück, wenn kein Query-Parameter existiert
+        if ($position === false) return $path; // Gibt den ganzen Pfad zurück, wenn kein Query-Parameter existiert
 
         return substr($path, 0, $position); // Gibt den Pfad ohne Query-Parameter zurück
     }
@@ -38,5 +38,24 @@ class Request
     public function getMethod()
     {
         return strtolower($_SERVER['REQUEST_METHOD']); // Holt die Anfragemethode und konvertiert sie in Kleinbuchstaben
+    }
+
+    public function getBody()
+    {
+        $body = [];
+
+        if ($this->getMethod() === 'get') {
+            foreach ($_GET as $key => $value) {
+                $body[$key] = filter_input(INPUT_GET, $key, FILTER_SANITIZE_SPECIAL_CHARS);
+            }
+        }
+
+        if ($this->getMethod() === 'post') {
+            foreach ($_POST as $key => $value) {
+                $body[$key] = filter_input(INPUT_POST, $key, FILTER_SANITIZE_SPECIAL_CHARS);
+            }
+        }
+
+        return $body;
     }
 }
