@@ -15,7 +15,8 @@ class Application
     public Router $router; // Router-Instanz für URL-Routing
     public Request $request; // Request-Instanz für HTTP-Anfragen
     public static Application $app;
-    public Response $response; 
+    public Response $response;
+    public Controller $controller;
 
     /**
      * Konstruktor - Initialisiert die Anwendung
@@ -35,5 +36,16 @@ class Application
     public function run()
     {
         echo $this->router->resolve(); // Löst die aktuelle Route/URL auf
+    }
+
+
+    public function getController(): \app\core\Controller
+    {
+        return $this->controller;
+    }
+
+    public function setController(\app\core\Controller $controller): void
+    {
+        $this->controller = $controller;
     }
 }

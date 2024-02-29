@@ -48,7 +48,7 @@ class Router
     public function resolve()
     {
         $path = $this->request->getPath();
-        $method = $this->request->getMethod();
+        $method = $this->request->method();
         $callback = $this->routes[$method][$path] ?? null;
 
         if ($callback === null) {
@@ -61,7 +61,9 @@ class Router
         }
 
         if (is_array($callback)) {
-            $callback[0] = new $callback[0];
+            # $callback[0] = new $callback[0]();
+            Application::$app->controller = new $callback[0]();
+            $callback[0] = Application::$app->controller ;
         }
 
         return call_user_func($callback, $this->request);
@@ -69,9 +71,9 @@ class Router
 
 
 
-    public function renderView($view, array $params = [], string  $layout = 'main')
+    public function renderView($view, array $params = [])
     {
-        $layoutContent = $this->layoutContent($layout);
+        $layoutContent = $this->layoutContent();
         $viewContent = $this->renderOnlyView($view, $params);
 
         return str_replace('{{ content }}', $viewContent, $layoutContent);
@@ -83,8 +85,9 @@ class Router
         return str_replace('{{ content }}', $viewContent, $layoutContent);
     }
 
-    protected function layoutContent($layout)
+    protected function layoutContent()
     {
+        $layout = Application::$app->controller->layout ?? 'main';
         ob_start();
         include_once Application::$ROOT_DIR . "/views/layouts/$layout.php";
         return ob_get_clean();
@@ -92,6 +95,7 @@ class Router
 
     protected function renderOnlyView($view, $params)
     {
+        ### TODO: Router 001
         // Erzeugt die Parameter für die View 
         // im wenn der übergebene parameter $pramams[name] ist kann der in der view mit $name aufgerufen werden dafür sorgt $$key
         foreach ($params as $key => $value) {
