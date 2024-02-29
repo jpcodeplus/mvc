@@ -1,3 +1,4 @@
+<section class="w-screen max-w-screen-xl mx-auto p-4 bg-gray-100">
 <h1 class="mb-4 text-4xl font-extrabold leading-none tracking-tight text-gray-700 md:text-5xl lg:text-6xl text-center">Contact</h1>
 <h2 class="text-4xl font-extrabold text-center text-gray-600">Payments tool for companies</h2>
 
@@ -19,3 +20,5 @@
   </div>
   <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Submit</button>
 </form>
+</section>
+
